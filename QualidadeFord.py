@@ -1,8 +1,8 @@
 import time
 import pandas as pd
 from selenium import webdriver
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -11,8 +11,7 @@ from datetime import date
 import urllib.parse
 
 # Configurar o serviço do WebDriver
-servico = Service(GeckoDriverManager().install())
-navegador = webdriver.Firefox(service=servico)
+navegador = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 # Definir a URL e as credenciais
 url = 'https://onecxford.medallia.com/sso/onecxford/applications/ex_WEB-9/pages/2258?roleId=88523&f.calculation=29&f.columns=tp&f.benchmark=100000004&f.pfk_ford_onecx_journey_segment_alt=191_2&f.pfe_ford_dealer_name_unit=1093416&f.timeperiod=364&f.reporting-date=k_onecx_cvp_final_posted_datetime&alreftoken=%22%5C%2291a4c8c6753893074be0d8f77de14270%5C%22%5C%22%22'
