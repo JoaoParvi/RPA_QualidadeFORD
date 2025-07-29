@@ -34,14 +34,10 @@ campo_login = wait.until(EC.presence_of_element_located((By.ID, "userName")))
 campo_login.send_keys(login)
 campo_login.send_keys(Keys.ENTER)
 
-    # Inserir senha
+# Inserir senha
 campo_senha = wait.until(EC.presence_of_element_located((By.ID, "password")))
 campo_senha.send_keys(senha)
 campo_senha.send_keys(Keys.ENTER)
-
-# Clique para logar
-click_login = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#btn-sign-in')))
-click_login.click()
 
 # Clicar em concessionária
 click_filtro = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[3]/div[2]/div/main/div[1]/div[1]/div/div/div/div/div/div/div/div[1]/button/div/div[2]')))
