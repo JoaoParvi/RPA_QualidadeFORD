@@ -67,14 +67,26 @@ df = pd.DataFrame({
     "Indice_Nacional": [Indice_Nacional]
 })
 
-# Limpeza de texto
-df['Nota_Nacional'] = df['Nota_Nacional'].str.replace('País da Concessionária: ', '', regex=False)
-df['Satisfacao_Nacional'] = df['Satisfacao_Nacional'].str.replace('País da Concessionária: ', '', regex=False)
-df['Indice_Nacional'] = df['Indice_Nacional'].str.replace('País da Concessionária: ', '', regex=False)
+# Função para limpar e substituir valores inválidos
+def limpar_valor(valor):
+    if valor is None or valor.strip() in ('', '-', '–'):
+        return '0'
+    return valor.replace(',', '.')
 
+# Aplicar limpeza nos campos
+df['Nota'] = df['Nota'].apply(limpar_valor)
+df['Nota_Nacional'] = df['Nota_Nacional'].str.replace('País da Concessionária: ', '', regex=False).apply(limpar_valor)
+df['Satisfacao'] = df['Satisfacao'].apply(limpar_valor)
+df['Satisfacao_Nacional'] = df['Satisfacao_Nacional'].str.replace('País da Concessionária: ', '', regex=False).apply(limpar_valor)
+df['Indice'] = df['Indice'].apply(limpar_valor)
+df['Indice_Nacional'] = df['Indice_Nacional'].str.replace('País da Concessionária: ', '', regex=False).apply(limpar_valor)
+
+# Converter colunas para float
+colunas_numericas = ['Nota', 'Nota_Nacional', 'Satisfacao', 'Satisfacao_Nacional', 'Indice', 'Indice_Nacional']
+df[colunas_numericas] = df[colunas_numericas].astype(float)
+
+# Adicionar colunas adicionais
 df['Satisfacao_Global'] = 'Ford'
-
-# Adicionar coluna segmento e data
 df['Segmento'] = 'Pos Vendas'
 df['data_atualizacao'] = date.today()
 
